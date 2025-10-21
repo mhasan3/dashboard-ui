@@ -15,7 +15,12 @@
                 <div class="indicator">
                     <button class="btn btn-warning btn-sm rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-black">My Account</button>
                 </div>
-                <button class="btn btn-ghost btn-sm rounded-full bg-red-500 px-4 py-2 text-sm font-semibold text-white">Log Out</button>
+                <button
+                  class="btn btn-ghost btn-sm rounded-full bg-red-500 px-4 py-2 text-sm font-semibold text-white"
+                  on:click={() => window.location.href = '/logout'}
+                >
+                    Log Out
+                </button>
             </div>
     </div>
 </div>
