@@ -12,10 +12,10 @@
     <div class="basis-1/4 md:basis-1/3">
             <div class="flex gap-2 justify-end">
                 <div class="indicator">
-                    <button class="btn btn-warning btn-sm rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-black"
-                            on:click={() => window.location.href = '/account'}>
+                    <a class="btn btn-warning btn-sm rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-black"
+                            href="/account">
                         My account
-                    </button>
+                    </a>
                 </div>
                 <button
                   class="btn btn-ghost btn-sm rounded-full bg-red-500 px-4 py-2 text-sm font-semibold text-white"

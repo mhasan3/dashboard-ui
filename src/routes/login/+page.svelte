@@ -35,10 +35,14 @@
 
 			const data = await response.json();
 
-			isLoggedIn.set(true);
 			token.set(data.token);
 
 			localStorage.setItem('token', data.token);
+			let userToken = localStorage.getItem('token');
+			if (userToken) {
+				console.log(userToken);
+				isLoggedIn.set(true);
+			}
 
 			goto('/dashboard');
 		} catch (error) {
