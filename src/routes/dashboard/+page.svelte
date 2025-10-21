@@ -62,8 +62,6 @@
 	onMount(() => {
 		if (!$isLoggedIn) {
 			goto('/login');
-		}else{
-
 		}
 	});
 </script>

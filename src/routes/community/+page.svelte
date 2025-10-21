@@ -17,7 +17,7 @@ onMount(() => {
 	<div class="bg-gray-100 min-h-screen">
 		<Navbar />
 		<main class="container mx-auto">
-			<p class="text-black">help page</p>
+			<p class="text-black">community page</p>
 
 		</main>
 	</div>
