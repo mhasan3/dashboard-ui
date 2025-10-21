@@ -2,8 +2,8 @@
     <div class="flex justify-between items-start">
         <div>
             <div class="flex items-center gap-4 mb-3">
-                <span class="font-semibold">Name: John Doe</span>
-                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded">Personal Information Verification</span>
+                <span class="text-black font-bold">Name: John Doe</span>
+                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded btn btn-soft btn-info">Personal Information Verification</span>
             </div>
             <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600">
                 <div class="flex items-center">

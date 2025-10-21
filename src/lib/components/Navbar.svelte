@@ -4,7 +4,7 @@
     <div class="basis-1/2 md:basis-1/3">
         <div class="hidden md:flex ml-8 space-x-6">
             <a href="/" class="hover:text-white/80">Home</a>
-            <a href="/" class="hover:text-white/80">Help</a>
+            <a href="/help" class="hover:text-white/80">Help</a>
             <a href="/" class="hover:text-white/80">Download</a>
             <a href="/" class="hover:text-white/80">Community</a>
             <a href="/" class="hover:text-white/80">Others</a>

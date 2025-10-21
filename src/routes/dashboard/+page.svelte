@@ -2,12 +2,14 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import AccountHeader from '$lib/components/AccountHeader.svelte';
 	import ActionCard from '$lib/components/ActionCard.svelte';
-
+	import { isLoggedIn } from '$store/store.js';
+	import { onMount } from 'svelte';
 	// Import icons from svelte-lucide
 	import {
 		Landmark, ArrowRightLeft, ShieldCheck, FileText,
 		Building, KeyRound, Banknote, UserCog, Link, Wallet
 	} from 'svelte-lucide';
+	import { goto } from '$app/navigation';
 
     const actions = [
 		{
@@ -56,8 +58,18 @@
 			icon: Wallet
 		},
 	];
+
+	onMount(() => {
+		if (!$isLoggedIn) {
+			goto('/login');
+		}else{
+
+		}
+	});
 </script>
 
+
+{#if $isLoggedIn}
 <div class="bg-gray-100 min-h-screen">
 	<Navbar />
     <main class="container mx-auto">
@@ -73,3 +85,4 @@
 			</div>
 		</main>
 </div>
+{/if}
