@@ -10,6 +10,9 @@
 		Building, KeyRound, Banknote, UserCog, Link, Wallet
 	} from 'svelte-lucide';
 	import { goto } from '$app/navigation';
+	import DepositModal from '$lib/components/DepositModal.svelte';
+
+	let showDepositModal = false;
 
     const actions = [
 		{
@@ -74,13 +77,23 @@
 			<AccountHeader />
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-0 mb-6 p-6">
 				{#each actions as action}
-					<ActionCard
-						title={action.title}
-						description={action.description}
-						icon={action.icon}
-					/>
+					<div
+						class="cursor-pointer"
+						on:click={() => { if (action.title === 'Deposit') showDepositModal = true; }}
+						role="button"
+						tabindex="0"
+						on:keydown={(e) => { if (e.key === 'Enter' && action.title === 'Deposit') showDepositModal = true; }}
+					>
+						<ActionCard
+							title={action.title}
+							description={action.description}
+							icon={action.icon}
+						/>
+					</div>
 				{/each}
 			</div>
 		</main>
 </div>
+
+	<DepositModal bind:showModal={showDepositModal} />
 {/if}

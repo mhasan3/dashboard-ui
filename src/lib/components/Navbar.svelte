@@ -1,6 +1,12 @@
 <div class="navbar bg-gray-900 text-white px-4 p-6 mb-6">
 <div class="flex flex-row container mx-auto">
-    <div class="basis-1/4 md:basis-1/3">Dashboard UI</div>
+    <div class="basis-1/4 md:basis-1/3">
+        <div class="relative">
+            <a class="text-xl flex items-center" href="/dashboard">
+                <img src="tigerbrokers.svg" alt="logo" class="sm:h-10 h-12" />
+            </a>
+        </div>
+    </div>
     <div class="basis-1/2 md:basis-1/3">
         <div class="hidden md:flex ml-8 space-x-6">
             <a href="/dashboard" class="hover:text-white/80">Home</a>

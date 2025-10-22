@@ -63,7 +63,9 @@
 	<div class="w-full flex items-center justify-center p-8 bg-base-100">
 		<div class="w-full max-w-md">
 			<div class="card bg-base-100 shadow-xl border border-base-200 space-y-0">
-
+				<div class="text-center mb-0 mt-6">
+					<img src="/tigerbrokers.svg" alt="Tigerbrokers Logo" class="w-1/2 h-1/2 mx-auto mb-2.5" />
+				</div>
 
 				<div class="text-center mb-0 mt-6">
 					<h1
