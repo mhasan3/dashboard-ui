@@ -10,11 +10,11 @@
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	const initialDuration = 10; // 3 minutes in seconds
-	let duration = initialDuration;
+	const finalDuration = 10; // The target count (10 seconds)
+	let duration = 0; // START the counter at 0
 	let interval;
 
-	// Format seconds into MM:SS
+	// Format seconds into MM:SS (using 'duration' which now counts up)
 	function formatTime(seconds) {
 		const min = Math.floor(seconds / 60);
 		const sec = seconds % 60;
@@ -23,13 +23,14 @@
 
 	onMount(() => {
 		interval = setInterval(() => {
-			if (duration > 0) {
-				duration -= 1;
+			// Check if the current duration has reached the final target
+			if (duration < finalDuration) {
+				duration += 1; // Increment (Count Up)
 			} else {
+				// Condition met: duration is 10
 				clearInterval(interval);
 				dispatch('next');
-				console.log('next')
-				// Handle timer expiration (e.g., disable transaction)
+				console.log('next');
 			}
 		}, 1000);
 	});
