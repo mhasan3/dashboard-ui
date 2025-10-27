@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -12,6 +12,7 @@
 	const initialDuration = 10; // 3 minutes in seconds
 	let duration = initialDuration;
 	let interval;
+	export let selectedIcon: string;
 
 	// Format seconds into MM:SS
 	function formatTime(seconds) {
@@ -57,10 +58,6 @@
 	// NOTE: You must place a valid QR code image in the correct path for it to display.
 	const qrCodePlaceholder = '/qr_img.png';
 
-	const usdcLogoSvg = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="45" fill="#3E75C4"/>
-    <path fill="#ffffff" d="M30 40h40l-5 15h-30l5 10h30l-5 15H35z"/>
-  </svg>`;
 </script>
 
 <div class="min-h-screen bg-white text-gray-800 p-6 mt-10">
@@ -122,7 +119,7 @@
 			/>
 			<div class="absolute inset-0 flex items-center justify-center w-full h-full">
 				<div class="w-12 h-12 rounded-full p-1 bg-white" style="box-shadow: 0 0 0 2px white;">
-					{@html usdcLogoSvg}
+					<img src={selectedIcon} alt="Crypto Icon" class="w-full h-full object-contain" />
 				</div>
 			</div>
 		</div>

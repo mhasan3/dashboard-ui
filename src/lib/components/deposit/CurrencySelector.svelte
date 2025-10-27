@@ -16,9 +16,7 @@
 	{#each options as option, i}
 		<button
 			on:click={() => selectCurrency(option.code)}
-			class="flex items-center w-full text-left p-4 rounded-xl transition-colors {i === 1
-				? 'bg-yellow-50'
-				: 'bg-white'} hover:bg-gray-100 border"
+			class="flex items-center w-full text-left p-4 rounded-xl transition-colors bg-white hover:bg-yellow-50 border"
 		>
 			{#if option.name === 'DDA'}
 				<div

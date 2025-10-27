@@ -1,23 +1,42 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	// Change 'UploadCloud' to 'Upload' here
-	import { ArrowRight, Upload, File, X } from 'svelte-lucide';
+	import { ArrowRight, File, X } from 'svelte-lucide';
 
 	const dispatch = createEventDispatcher();
 
-	let selectedFile: File | null = null;
-	let fileInput: HTMLInputElement;
+	// State to track the selected file/state
+	let selectedState: 'success' | 'failure' | null = null;
+	let selectedFileName: string | null = null;
+	let failureReason = 'The document uploaded could not be verified by the system. Please try again with a clear photo or a different document.';
 
-	function handleFileSelect(e: Event) {
-		const target = e.target as HTMLInputElement;
-		if (target.files && target.files.length > 0) {
-			selectedFile = target.files[0];
+	// --- Mock File Data ---
+	const MOCK_SUCCESS_FILE = { name: 'Verified_Passport.pdf', state: 'success' };
+	const MOCK_FAILURE_FILE = { name: 'Unverified_ID.png', state: 'failure' };
+	// -----------------------
+
+	function handleFileSelect(state: 'success' | 'failure') {
+		if (state === 'success') {
+			selectedState = 'success';
+			selectedFileName = MOCK_SUCCESS_FILE.name;
+		} else {
+			selectedState = 'failure';
+			selectedFileName = MOCK_FAILURE_FILE.name;
 		}
 	}
 
+	function handleClear() {
+		selectedState = null;
+		selectedFileName = null;
+	}
+
 	function handleContinue() {
-		if (selectedFile) {
-			dispatch('next', { file: selectedFile });
+		if (selectedState === 'success') {
+			// SUCCESS PATH: Dispatches 'next' to move to the next logical step (e.g., Step 5)
+			dispatch('next');
+		} else if (selectedState === 'failure') {
+			// FAILURE PATH: Dispatches a custom 'failure' event with details
+			dispatch('failure', { reason: failureReason });
+			// dispatch('next');
 		}
 	}
 </script>
@@ -38,47 +57,57 @@
 
 	<ol class="space-y-1 list-decimal list-inside text-gray-600">
 		<li class="mt-0">Passport</li>
-		<li class="mt-6">National Identity Card</li>
-		<li class="mt-6">Driving License</li>
+		<li class="mt-1">National Identity Card</li>
+		<li class="mt-1">Driving License</li>
 	</ol>
 
-	<input
-		type="file"
-		class="hidden"
-		bind:this={fileInput}
-		on:change={handleFileSelect}
-		accept=".jpg,.jpeg,.png,.pdf"
-	/>
+	<div class="pt-4 border-t border-gray-100">
+		<h3 class="font-bold text-sm text-red-600 mb-2">DEV MODE: Select Flow</h3>
 
-	{#if !selectedFile}
-		<button
-			on:click={() => fileInput.click()}
-			class="flex flex-col items-center justify-center p-8 mt-4 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-		>
-			<Upload class="w-10 h-10 text-gray-400 mb-2" />
-			<span class="font-semibold text-black">Upload File</span>
-			<span class="text-sm text-gray-500">.jpg, .jpeg, .png or .pdf file</span>
-		</button>
-	{:else}
+		<div class="flex gap-3 mb-4">
+			<button
+				on:click={() => handleFileSelect('success')}
+				class="flex-1 btn btn-sm border-green-500 text-green-700 bg-green-50 hover:bg-green-100"
+			>
+<!--				<CheckCircle class="w-4 h-4" /> Success Flow-->
+			</button>
+
+			<button
+				on:click={() => handleFileSelect('failure')}
+				class="flex-1 btn btn-sm border-red-500 text-red-700 bg-red-50 hover:bg-red-100"
+			>
+<!--				<AlertTriangle class="w-4 h-4" /> Failure Flow-->
+			</button>
+		</div>
+	</div>
+	{#if selectedFileName}
 		<div
-			class="flex items-center justify-between p-4 mt-4 bg-gray-100 border border-gray-200 rounded-lg"
+			class="flex items-center justify-between p-4 bg-gray-100 border rounded-lg"
+			class:border-green-500={selectedState === 'success'}
+			class:border-red-500={selectedState === 'failure'}
 		>
 			<div class="flex items-center gap-3 overflow-hidden">
-				<File class="w-6 h-6 text-primary flex-shrink-0" />
-				<span class="font-medium text-sm truncate" title={selectedFile.name}>{selectedFile.name}</span>
+				<File
+					class="w-6 h-6 flex-shrink-0 {selectedState === 'failure' ? 'text-red-500' : 'text-primary'}"
+				/>
+				<span class="font-medium text-sm truncate" title={selectedFileName}>{selectedFileName}</span>
 			</div>
-			<button class="btn btn-xs btn-ghost btn-circle" on:click={() => (selectedFile = null)}>
+			<button class="btn btn-xs btn-ghost btn-circle" on:click={handleClear}>
 				<X class="w-4 h-4" />
 			</button>
 		</div>
+	{:else}
+		<p class="text-sm text-gray-500 text-center py-4">
+			(Or click a button above to simulate file selection)
+		</p>
 	{/if}
 
 	<div class="flex flex-col items-center gap-3 pt-4">
 		<button
 			class="btn btn-neutral"
-			class:opacity-50={!selectedFile}
-			class:pointer-events-none={!selectedFile}
-			disabled={!selectedFile}
+			class:opacity-50={!selectedState}
+			class:pointer-events-none={!selectedState}
+			disabled={!selectedState}
 			on:click={handleContinue}
 		>
 			Continue

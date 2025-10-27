@@ -17,9 +17,10 @@
 	{#each methods as method}
 		<button
 			on:click={() => selectMethod(method.title)}
+			disabled={method.title !== 'Pay with Cryptocurrency'}
 			class="card {method.isHighlighted
 				? 'bg-yellow-10'
-				: 'bg-white'} border rounded-xl p-4 text-left hover:shadow-lg transition-shadow"
+				: 'bg-white'} border rounded-xl p-4 text-left hover:bg-yellow-50 transition-shadow"
 		>
 			<div class="flex items-center gap-4">
 				<div
