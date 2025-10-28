@@ -16,7 +16,7 @@
 
     const actions = [
 		{
-			title: 'Deposit',
+			title: 'Deposit test',
 			description: 'View funding instructions and complete deposit notification',
 			icon: Landmark,
 		},
