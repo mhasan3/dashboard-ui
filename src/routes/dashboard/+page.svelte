@@ -7,7 +7,7 @@
 	// Import icons from svelte-lucide
 	import {
 		Landmark, ArrowRightLeft, ShieldCheck, FileText,
-		Building, KeyRound, Banknote, UserCog, Link, Wallet
+		Building, Banknote, UserCog, Link, Wallet
 	} from 'svelte-lucide';
 	import { goto } from '$app/navigation';
 	import DepositModal from '$lib/components/DepositModal.svelte';
